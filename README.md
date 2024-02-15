@@ -91,10 +91,4 @@ El proyecto está organizado en los siguientes paquetes y clases:
 - `com.example.caramelo.service.user.impl.JwtServiceImpl`: Implementación del servicio JWT.
 - `com.example.caramelo.service.user.impl.UserServiceImpl`: Implementación del servicio de usuario.
 
-## Contribuyendo
-Si deseas contribuir a este proyecto, por favor sigue estas instrucciones:
-1. Haz un fork del repositorio
-2. Crea una rama para tu funcionalidad (`git checkout -b feature/NuevaFuncionalidad`)
-3. Haz tus cambios y commitea (`git commit -am 'Agrega nueva funcionalidad'`)
-4. Sube los cambios a tu repositorio (`git push origin feature/NuevaFuncionalidad`)
-5. Abre un Pull Request
+
