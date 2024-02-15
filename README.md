@@ -2,43 +2,44 @@
 ## Documentación
 https://documenter.getpostman.com/view/32189101/2s9YyvAfe2
 ## Análisis Caso de uso
-### Descripción del Proyecto Tienda de Caramelos
+## Descripción del Proyecto Tienda de Jabones
 
-La Tienda de Caramelos es un proyecto emocionante diseñado para brindar a los amantes de los dulces una experiencia única al explorar y adquirir una amplia variedad de caramelos artesanales. La tienda se concibe como un espacio virtual interactivo donde los clientes pueden acceder a diversas funcionalidades destinadas a satisfacer sus antojos de dulces y disfrutar de momentos deliciosos.
+La Tienda de Jabones es un proyecto apasionante diseñado para brindar a los amantes del cuidado personal una experiencia única al explorar y adquirir una amplia variedad de jabones artesanales. La tienda se concibe como un espacio virtual interactivo donde los clientes pueden acceder a diversas funcionalidades destinadas a satisfacer sus necesidades de cuidado personal y bienestar.
 
 ### Componente Central
 
-El componente central de la tienda es un catálogo diverso de caramelos artesanales, elaborados con ingredientes naturales y diseñados para proporcionar sabores y experiencias únicas. Los usuarios registrados pueden explorar este catálogo y sumergirse en un mundo de deliciosas opciones.
+El componente central de la tienda es un catálogo diverso de jabones artesanales, elaborados con ingredientes naturales y diseñados para proporcionar beneficios específicos para la piel. Los usuarios registrados pueden explorar este catálogo.
 
 ### Identificación de Actores:
 
-1. **Adicto al Azúcar:** Persona que ha creado una cuenta en la tienda y tiene acceso a contenido exclusivo.
-2. **Visitante Azucarado:** Persona que accede a la tienda sin registrarse y no tiene acceso a nada.
-3. **Dulcero Jefe:** Responsable de gestionar y mantener la tienda. Tiene acceso a herramientas de administración, como la gestión de productos y de clientes.
+1. **Cliente Registrado:** Persona que ha creado una cuenta en la tienda y tiene acceso a contenido exclusivo.
+2. **Visitante:** Persona que accede a la tienda sin registrarse y no tiene acceso a nada.
+3. **Administrador de la Tienda:** Responsable de gestionar y mantener la tienda. Tiene acceso a herramientas de administración, como la gestión de productos y de clientes.
 
-### Casos de Uso:
+## Casos de Uso:
 
-#### Explorar y Comprar:
+### Explorar y Comprar:
 
-**Actor Principal:** Adicto al Azúcar
+**Actor Principal:** Cliente Registrado
 
-**Descripción:** El adicto al azúcar explora el catálogo de caramelos, selecciona productos para comprar.
+**Descripción:** El actor explora el catálogo de jabones, selecciona productos para comprar.
 
-**Precondiciones:** El adicto al azúcar debe estar registrado.
+**Precondiciones:** El actor debe estar registrado.
 
-**Postcondiciones:** Se realiza la compra y se actualiza el historial de compras del adicto al azúcar.
+**Postcondiciones:** Se realiza la compra y se actualiza el historial de compras del cliente registrado.
 
-#### Análisis Detallado de Caso de Uso: Explorar
+### Análisis Detallado de Caso de Uso: Explorar
 
-**Descripción Detallada:** El adicto al azúcar registra o visita el catálogo de caramelos, selecciona productos para comprar y los agrega al carrito de compras.
+**Descripción Detallada:** El cliente registra o visita el catálogo de jabones, selecciona productos para comprar, agrega al carrito de compras.
 
-**Precondiciones:** El adicto al azúcar debe estar registrado.
+**Precondiciones:** El cliente debe estar registrado.
 
-**Postcondiciones:** La compra se realiza con éxito, y el adicto al azúcar disfruta de sus deliciosos caramelos.
+**Postcondiciones:** (No especificadas en el texto original).
 
 ## Reflexión:
 
-Este análisis destaca la importancia de funciones clave para la experiencia del adicto al azúcar, como la exploración fácil del catálogo y la simplicidad en el proceso de compra de caramelos. Una interfaz de usuario intuitiva y la calidad de los caramelos son cruciales. Además, la gestión eficiente del historial de compras del adicto al azúcar y la atención personalizada son aspectos a considerar en el diseño y desarrollo de la tienda de caramelos. La retroalimentación y la participación activa de los adictos al azúcar son esenciales para mejorar continuamente la tienda y garantizar una experiencia de compra dulcemente satisfactoria.
+Este análisis resalta la importancia de las funciones clave para la experiencia del cliente, como la exploración fácil del catálogo y la sencillez en el proceso de compra. La necesidad de una interfaz de usuario intuitiva y la calidad de los productos ofrecidos son elementos cruciales. Además, la gestión eficiente del historial de compras del cliente y la atención personalizada son aspectos a considerar en el diseño y desarrollo de la tienda. La retroalimentación y la participación activa de los clientes son esenciales para mejorar continuamente la tienda y garantizar una experiencia de compra satisfactoria.
+
 
 
 ## Descripción
