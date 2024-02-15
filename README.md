@@ -1,14 +1,11 @@
 # Caramelo Application
 ## Documentación
 https://documenter.getpostman.com/view/32189101/2s9YyvAfe2
+
 ## Análisis Caso de uso
-## Descripción del Proyecto Tienda de Jabones
+### Descripción del Proyecto Tienda de Caramelos
 
-La Tienda de Jabones es un proyecto apasionante diseñado para brindar a los amantes del cuidado personal una experiencia única al explorar y adquirir una amplia variedad de jabones artesanales. La tienda se concibe como un espacio virtual interactivo donde los clientes pueden acceder a diversas funcionalidades destinadas a satisfacer sus necesidades de cuidado personal y bienestar.
-
-### Componente Central
-
-El componente central de la tienda es un catálogo diverso de jabones artesanales, elaborados con ingredientes naturales y diseñados para proporcionar beneficios específicos para la piel. Los usuarios registrados pueden explorar este catálogo.
+La Tienda de Caramelos es una aplicación para la gestión de caramelos. Permite a los usuarios explorar diferentes tipos de caramelos y realizar operaciones relacionadas con ellos.
 
 ### Identificación de Actores:
 
@@ -16,34 +13,30 @@ El componente central de la tienda es un catálogo diverso de jabones artesanale
 2. **Visitante:** Persona que accede a la tienda sin registrarse y no tiene acceso a nada.
 3. **Administrador de la Tienda:** Responsable de gestionar y mantener la tienda. Tiene acceso a herramientas de administración, como la gestión de productos y de clientes.
 
-## Casos de Uso:
+### Casos de Uso:
 
-### Explorar y Comprar:
+### Explorar:
 
 **Actor Principal:** Cliente Registrado
 
-**Descripción:** El actor explora el catálogo de jabones, selecciona productos para comprar.
+**Descripción:** El cliente registrado explora el catálogo de caramelos.
 
-**Precondiciones:** El actor debe estar registrado.
+**Precondiciones:** El cliente registrado debe estar autenticado.
 
 **Postcondiciones:** Se realiza la compra y se actualiza el historial de compras del cliente registrado.
 
 ### Análisis Detallado de Caso de Uso: Explorar
 
-**Descripción Detallada:** El cliente registra o visita el catálogo de jabones, selecciona productos para comprar, agrega al carrito de compras.
+**Descripción Detallada:** El cliente registrado visita el catálogo de caramelos, selecciona productos para comprar y los agrega al carrito de compras.
 
-**Precondiciones:** El cliente debe estar registrado.
+**Precondiciones:** El cliente registrado debe estar autenticado.
 
-**Postcondiciones:** (No especificadas en el texto original).
+**Postcondiciones:** La compra se realiza con éxito, y el cliente registrado disfruta de sus deliciosos caramelos.
 
 ## Reflexión:
 
-Este análisis resalta la importancia de las funciones clave para la experiencia del cliente, como la exploración fácil del catálogo y la sencillez en el proceso de compra. La necesidad de una interfaz de usuario intuitiva y la calidad de los productos ofrecidos son elementos cruciales. Además, la gestión eficiente del historial de compras del cliente y la atención personalizada son aspectos a considerar en el diseño y desarrollo de la tienda. La retroalimentación y la participación activa de los clientes son esenciales para mejorar continuamente la tienda y garantizar una experiencia de compra satisfactoria.
+Este análisis resalta la importancia de funciones clave para la experiencia del cliente, como la exploración fácil del catálogo y la sencillez en el proceso de compra. La necesidad de una interfaz de usuario intuitiva y la calidad de los productos ofrecidos son elementos cruciales. Además, la gestión eficiente del historial de compras del cliente y la atención personalizada son aspectos a considerar en el diseño y desarrollo de la tienda. La retroalimentación y la participación activa de los clientes son esenciales para mejorar continuamente la tienda y garantizar una experiencia de compra satisfactoria.
 
-
-
-## Descripción
-Caramelo es una aplicación para la gestión de caramelos. Permite a los usuarios explorar diferentes tipos de caramelos y realizar operaciones relacionadas con ellos.
 
 ## Estructura del Proyecto
 
