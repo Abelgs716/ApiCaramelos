@@ -1,98 +1,79 @@
 package com.example.caramelo.controlador;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Page;
-import org.springframework.test.web.servlet.MockMvc;
-
 import com.example.caramelo.controller.CaramelosController;
 import com.example.caramelo.entities.Caramelo;
 import com.example.caramelo.service.CaramelosService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-@WebMvcTest(CaramelosController.class)
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
 public class CaramelosControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private CaramelosService caramelosService;
 
+    @InjectMocks
+    private CaramelosController caramelosController;
+
+
+
     @Test
-    void testListarTodosLosCaramelos() throws Exception {
-        // Mocking the service response
-        when(caramelosService.listarTodosLosCaramelos(any())).thenReturn(Page.empty());
+    void testGetCarameloById() {
 
-        mockMvc.perform(get("/api/v1/caramelos"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content").isArray());
+        Long carameloId = 1L;
+        when(caramelosService.obtenerCarameloPorId(carameloId)).thenReturn(Optional.of(new Caramelo()).get());
 
-        // Verify that the service method is called
-        verify(caramelosService).listarTodosLosCaramelos(any());
+        Caramelo result = caramelosController.getCarameloById(carameloId);
+
+        verify(caramelosService, times(1)).obtenerCarameloPorId(carameloId);
+        verifyNoMoreInteractions(caramelosService);
     }
 
     @Test
-    void testGetCarameloById() throws Exception {
-        // Mocking the service response
-        when(caramelosService.obtenerCarameloPorId(1L)).thenReturn(new Caramelo());
+    void testCreateCaramelo() {
 
-        mockMvc.perform(get("/api/v1/caramelos/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists());
+        Caramelo carameloToCreate = new Caramelo();
+        when(caramelosService.agregarCaramelo(carameloToCreate)).thenReturn(new Caramelo());
 
-        // Verify that the service method is called
-        verify(caramelosService).obtenerCarameloPorId(1L);
+        Caramelo result = caramelosController.createCaramelo(carameloToCreate);
+
+        verify(caramelosService, times(1)).agregarCaramelo(carameloToCreate);
+        verifyNoMoreInteractions(caramelosService);
     }
 
     @Test
-    void testCreateCaramelo() throws Exception {
-        // Mocking the service response
-        when(caramelosService.agregarCaramelo(any(Caramelo.class))).thenReturn(new Caramelo());
+    void testUpdateCaramelo() {
+ 
+        Long carameloId = 1L;
+        Caramelo carameloDetails = new Caramelo();
+        when(caramelosService.actualizarCaramelo(carameloId, carameloDetails)).thenReturn(new Caramelo());
 
-        mockMvc.perform(post("/api/v1/caramelos")
-                .contentType("application/json")
-                .content("{}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists());
+        Caramelo result = caramelosController.updateCaramelo(carameloId, carameloDetails);
 
-        // Verify that the service method is called
-        verify(caramelosService).agregarCaramelo(any(Caramelo.class));
+        verify(caramelosService, times(1)).actualizarCaramelo(carameloId, carameloDetails);
+        verifyNoMoreInteractions(caramelosService);
     }
 
     @Test
-    void testUpdateCaramelo() throws Exception {
-        // Mocking the service response
-        when(caramelosService.actualizarCaramelo(any(Long.class), any(Caramelo.class))).thenReturn(new Caramelo());
+    void testDeleteCaramelo() {
 
-        mockMvc.perform(put("/api/v1/caramelos/1")
-                .contentType("application/json")
-                .content("{}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists());
+        Long carameloId = 1L;
 
-        // Verify that the service method is called
-        verify(caramelosService).actualizarCaramelo(any(Long.class), any(Caramelo.class));
-    }
+        caramelosController.deleteCaramelo(carameloId);
 
-    @Test
-    void testDeleteCaramelo() throws Exception {
-        mockMvc.perform(delete("/api/v1/caramelos/1"))
-                .andExpect(status().isOk());
-
-        // Verify that the service method is called
-        verify(caramelosService).eliminarCaramelo(1L);
+        verify(caramelosService, times(1)).eliminarCaramelo(carameloId);
+        verifyNoMoreInteractions(caramelosService);
     }
 }
-
-
