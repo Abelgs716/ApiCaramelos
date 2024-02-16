@@ -17,10 +17,12 @@ import jakarta.validation.Valid;
 public class CaramelosServiceImpl implements CaramelosService {
 
 
-    @Autowired
-    private CarameloRepository CarameloRepository;
+    private final CarameloRepository CarameloRepository;
 
-
+    public CaramelosServiceImpl(CarameloRepository repository) {
+    	this.CarameloRepository = repository;
+    }
+    
     @Override
     public Caramelo agregarCaramelo(@Valid Caramelo Caramelo) {
         return CarameloRepository.save(Caramelo);
