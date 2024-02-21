@@ -18,17 +18,24 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-@CrossOrigin 
+@CrossOrigin
 public class AuthenticationController {
-	@Autowired
+
+    @Autowired
     AuthenticationService authenticationService;
+
+    // Endpoint para el registro de nuevos usuarios
     @PostMapping("/signup")
     public ResponseEntity<JwtAuthenticationResponse> signup(@RequestBody SignUpRequest request) {
+        // Invocar al servicio de autenticación para el registro y retornar la respuesta
         return ResponseEntity.ok(authenticationService.signup(request));
     }
 
+    // Endpoint para la autenticación de usuarios existentes
     @PostMapping("/signin")
     public ResponseEntity<JwtAuthenticationResponse> signin(@RequestBody SigninRequest request) {
+        // Invocar al servicio de autenticación para el inicio de sesión y retornar la
+        // respuesta
         return ResponseEntity.ok(authenticationService.signin(request));
     }
 }

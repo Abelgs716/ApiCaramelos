@@ -1,7 +1,6 @@
 package com.example.caramelo.controller;
 
 import org.slf4j.Logger;
-
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,34 +15,37 @@ import com.example.caramelo.dto.response.PexelsResponse;
 import com.example.caramelo.dto.response.user.UsuarioResponse;
 import com.example.caramelo.entities.Usuario;
 
-
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/v1/resources")
 @RequiredArgsConstructor
-@CrossOrigin 
+@CrossOrigin
 public class AuthorizationController {
-	private static final Logger logger = LoggerFactory.getLogger(AuthorizationController.class);
 
-	
-	
+    private static final Logger logger = LoggerFactory.getLogger(AuthorizationController.class);
+
+    // Endpoint para saludar al usuario
     @GetMapping
     public ResponseEntity<String> sayHello() {
-    	logger.info("## AuthorizationController :: sayHello" );
+        // Registrar información en el log sobre la llamada al endpoint
+        logger.info("## AuthorizationController :: sayHello");
         return ResponseEntity.ok("Here is your resource");
     }
-    
+
+    // Endpoint para obtener el perfil del usuario autenticado
     @GetMapping("/perfil")
     public ResponseEntity<UsuarioResponse> miPerfil(@AuthenticationPrincipal Usuario usuario) {
-    	logger.info("## AuthorizationController :: miPerfil" );
-    	
-    	UsuarioResponse userResponse = new UsuarioResponse(usuario.getFirstName(), usuario.getLastName(), usuario.getEmail(), usuario.getRoles().toString());
-    	
-    	return  ResponseEntity.ok(userResponse);
-    }
- 
-    
+        // Registrar información en el log sobre la llamada al endpoint
+        logger.info("## AuthorizationController :: miPerfil");
 
+        // Crear una respuesta de usuario a partir de la información del usuario
+        // autenticado
+        UsuarioResponse userResponse = new UsuarioResponse(usuario.getFirstName(), usuario.getLastName(),
+                usuario.getEmail(), usuario.getRoles().toString());
+
+        // Retornar la respuesta de usuario
+        return ResponseEntity.ok(userResponse);
+    }
 }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.caramelo.entities.Caramelo;
@@ -30,67 +29,66 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
+@RestController
+@RequestMapping("/api/v1/caramelos")
+public class CaramelosController {
 
-	@RestController
-	@RequestMapping("/api/v1/caramelos")
-	public class CaramelosController {
+	private static final Logger logger = LoggerFactory.getLogger(CaramelosController.class);
 
-    	private static final Logger logger = LoggerFactory.getLogger(CaramelosController.class);
+	@Autowired
+	private CaramelosService caramelosService;
 
-	    @Autowired
-	    private CaramelosService caramelosService;
-	    
-	  
+	// Endpoint para obtener un listado de caramelos, accesible solo por ROLE_USER y
+	// ROLE_ADMIN
+	@GetMapping
+	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
+	public ResponseEntity<Page<Caramelo>> listarTodosLosCaramelos(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
 
-	    // Endpoint para obtener un listado de caramelos, accesible solo por ROLE_USER
-	    @GetMapping
-	    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
-	    public ResponseEntity<Page<Caramelo>> listarTodosLosCaramelos(
-	            @RequestParam(defaultValue = "0") int page,
-	            @RequestParam(defaultValue = "10") int size) {
-	        
-	        logger.info("CaramelosController :: listarTodosLosCaramelos");
-	        Pageable pageable = PageRequest.of(page, size);
-	        Page<Caramelo> caramelos = caramelosService.listarTodosLosCaramelos(pageable);
-	        
-	   
-	        
-	        return new ResponseEntity<>(caramelos, HttpStatus.OK);
-	    }
-	    
-	 // Leer un caramelo por ID
-	    @GetMapping("/{id}")
-	    @PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
-	    public Caramelo getCarameloById(@PathVariable Long id) {
-	        return caramelosService.obtenerCarameloPorId(id);
-	    }
+		// Registrar información en el log sobre la llamada al endpoint
+		logger.info("CaramelosController :: listarTodosLosCaramelos");
 
-	    // CRUD endpoints, accesibles solo por ROLE_ADMIN
-	    // Crear un nuevo caramelo
-	    @PostMapping
-	    @PreAuthorize("hasRole('ROLE_ADMIN')")
-	    public Caramelo createCaramelo(@Valid @RequestBody Caramelo caramelo) {
-	    
-	        return caramelosService.agregarCaramelo(caramelo);
-	    }
+		// Definir la paginación para la solicitud
+		Pageable pageable = PageRequest.of(page, size);
 
-	    // Actualizar un caramelo
-	    @PutMapping("/{id}")
-	    @PreAuthorize("hasRole('ROLE_ADMIN')")
-	    public Caramelo updateCaramelo(@PathVariable Long id, @RequestBody Caramelo carameloDetails) {
-	        return caramelosService.actualizarCaramelo(id, carameloDetails);
-	    }
+		// Obtener la página de caramelos utilizando el servicio
+		Page<Caramelo> caramelos = caramelosService.listarTodosLosCaramelos(pageable);
 
-	    // Eliminar un caramelo
-	    @DeleteMapping("/{id}")
-	    @PreAuthorize("hasRole('ROLE_ADMIN')")
-	    public void deleteCaramelo(@PathVariable Long id) {
-	    	caramelosService.eliminarCaramelo(id);
-	    }
-	    
-	  
-	    }
-	    
-	    
-	    
-	
+		// Retornar la página de caramelos como respuesta
+		return new ResponseEntity<>(caramelos, HttpStatus.OK);
+	}
+
+	// Leer un caramelo por ID
+	@GetMapping("/{id}")
+	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
+	public Caramelo getCarameloById(@PathVariable Long id) {
+		// Obtener un caramelo por su ID utilizando el servicio
+		return caramelosService.obtenerCarameloPorId(id);
+	}
+
+	// CRUD endpoints, accesibles solo por ROLE_ADMIN
+	// Crear un nuevo caramelo
+	@PostMapping
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public Caramelo createCaramelo(@Valid @RequestBody Caramelo caramelo) {
+		// Agregar un nuevo caramelo utilizando el servicio
+		return caramelosService.agregarCaramelo(caramelo);
+	}
+
+	// Actualizar un caramelo
+	@PutMapping("/{id}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public Caramelo updateCaramelo(@PathVariable Long id, @RequestBody Caramelo carameloDetails) {
+		// Actualizar un caramelo existente utilizando el servicio
+		return caramelosService.actualizarCaramelo(id, carameloDetails);
+	}
+
+	// Eliminar un caramelo
+	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public void deleteCaramelo(@PathVariable Long id) {
+		// Eliminar un caramelo por su ID utilizando el servicio
+		caramelosService.eliminarCaramelo(id);
+	}
+}

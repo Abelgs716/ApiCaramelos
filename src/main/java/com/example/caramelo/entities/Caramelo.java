@@ -1,7 +1,6 @@
 package com.example.caramelo.entities;
 
 import jakarta.persistence.Column;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,10 +10,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-
+// Clase que representa la entidad Caramelo en la base de datos
 @Entity
 @Table(name = "caramelos")
 public class Caramelo {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -28,12 +28,19 @@ public class Caramelo {
 	@NotBlank(message = "El peso no puede estar vacío")
 	@Pattern(regexp = "[0-9]+", message = "El peso solo debe contener números")
 	private String peso;
+
 	private String color;
 
+	// Métodos de acceso para el ID
 	public Long getId() {
 		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	// Métodos de acceso para el peso
 	public String getPeso() {
 		return peso;
 	}
@@ -42,6 +49,7 @@ public class Caramelo {
 		this.peso = peso;
 	}
 
+	// Métodos de acceso para el color
 	public String getColor() {
 		return color;
 	}
@@ -50,12 +58,7 @@ public class Caramelo {
 		this.color = color;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-
+	// Métodos de acceso para el nombre
 	public String getNombre() {
 		return nombre;
 	}
@@ -64,6 +67,7 @@ public class Caramelo {
 		this.nombre = nombre;
 	}
 
+	// Métodos de acceso para los ingredientes
 	public String getIngredientes() {
 		return ingredientes;
 	}
@@ -71,7 +75,4 @@ public class Caramelo {
 	public void setIngredientes(String ingredientes) {
 		this.ingredientes = ingredientes;
 	}
-
-	
-
 }

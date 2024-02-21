@@ -1,11 +1,14 @@
 package com.example.caramelo.dto.response.user;
 
+// Clase que representa la respuesta de usuario (UsuarioResponse)
 public class UsuarioResponse {
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String rol;
 
+	private String firstName; // Nombre del usuario
+	private String lastName; // Apellido del usuario
+	private String email; // Correo electrónico del usuario
+	private String rol; // Rol del usuario
+
+	// Constructor que inicializa los campos de la respuesta de usuario
 	public UsuarioResponse(String firstName, String lastName, String email, String rol) {
 		super();
 		this.firstName = firstName;
@@ -14,6 +17,7 @@ public class UsuarioResponse {
 		this.rol = rol;
 	}
 
+	// Métodos de acceso para el nombre
 	public String getFirstName() {
 		return firstName;
 	}
@@ -22,6 +26,7 @@ public class UsuarioResponse {
 		this.firstName = firstName;
 	}
 
+	// Métodos de acceso para el apellido
 	public String getLastName() {
 		return lastName;
 	}
@@ -30,6 +35,7 @@ public class UsuarioResponse {
 		this.lastName = lastName;
 	}
 
+	// Métodos de acceso para el correo electrónico
 	public String getEmail() {
 		return email;
 	}
@@ -38,6 +44,7 @@ public class UsuarioResponse {
 		this.email = email;
 	}
 
+	// Métodos de acceso para el rol
 	public String getRol() {
 		return rol;
 	}
@@ -45,5 +52,4 @@ public class UsuarioResponse {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
-
 }

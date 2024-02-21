@@ -2,7 +2,6 @@ package com.example.caramelo.error;
 
 import java.util.Date;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -29,7 +28,7 @@ public class GlobalExceptionHandler {
 	}
 
 	/**
-	 * ################################################### # Libro 404 Not Found
+	 * ################################################### # Caramelo 404 Not Found
 	 * Exception ## ###################################################
 	 * 
 	 * @param ex

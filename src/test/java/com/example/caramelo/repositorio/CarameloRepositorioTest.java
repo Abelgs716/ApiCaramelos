@@ -12,71 +12,78 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import com.example.caramelo.entities.Caramelo;
-
 import com.example.caramelo.repository.CarameloRepository;
 
+// Configuración para ejecutar pruebas específicas de JPA
 @DataJpaTest
 public class CarameloRepositorioTest {
 
+    @Autowired
+    private TestEntityManager entityManager;
 
- @Autowired
- private TestEntityManager entityManager;
+    @Autowired
+    private CarameloRepository carameloRepositorio;
 
+    private Caramelo caramelo;
 
- @Autowired
- private CarameloRepository CarameloRepositorio;
+    // Configuración previa a cada test
+    @BeforeEach
+    void setUp() {
+        caramelo = new Caramelo();
+        caramelo.setNombre("Piruleta");
+        caramelo.setIngredientes("Azucar");
+        caramelo.setPeso("23g");
+        caramelo.setColor("rojo");
+        entityManager.persist(caramelo);
+        entityManager.flush();
+    }
 
+    // Test para el método save del repositorio
+    @Test
+    public void testGuardarCaramelo() {
+        // Arrange
+        Caramelo nuevoCaramelo = new Caramelo();
+        nuevoCaramelo.setNombre("Piruleta2");
+        nuevoCaramelo.setIngredientes("Azucar2");
+        nuevoCaramelo.setPeso("232g");
+        nuevoCaramelo.setColor("rojo2");
 
- private Caramelo caramelo;
+        // Act
+        Caramelo guardado = carameloRepositorio.save(nuevoCaramelo);
 
+        // Assert
+        assertThat(guardado).hasFieldOrPropertyWithValue("nombre", "Piruleta2");
+    }
 
- @BeforeEach
- void setUp() {
-     caramelo = new Caramelo();
- 	caramelo.setNombre("Piruleta");
-         caramelo.setIngredientes("Azucar");
-         caramelo.setPeso("23g");
-         caramelo.setColor("rojo");
-     entityManager.persist(caramelo);
+    // Test para el método findById del repositorio
+    @Test
+    public void testBuscarCarameloPorId() {
+        // Act
+        Caramelo encontrado = carameloRepositorio.findById(caramelo.getId()).orElse(null);
 
-     entityManager.flush();
- }
+        // Assert
+        assertThat(encontrado).isEqualTo(caramelo);
+    }
 
- @Test
- public void testGuardarCaramelo() {
+    // Test para el método findAll del repositorio
+    @Test
+    public void testListarCaramelos() {
+        // Act
+        List<Caramelo> caramelos = (List<Caramelo>) carameloRepositorio.findAll();
 
-     Caramelo nuevoCaramelo = new Caramelo();
-     nuevoCaramelo.setNombre("Piruleta2");
-     nuevoCaramelo.setIngredientes("Azucar2");
-     nuevoCaramelo.setPeso("232g");
-     nuevoCaramelo.setColor("rojo2");
-     Caramelo guardado = CarameloRepositorio.save(nuevoCaramelo);
+        // Assert
+        assertThat(caramelos).isNotEmpty();
+        assertThat(caramelos).contains(caramelo);
+    }
 
-     assertThat(guardado).hasFieldOrPropertyWithValue("nombre", "Piruleta2");
- }
+    // Test para el método delete del repositorio
+    @Test
+    public void testEliminarCaramelo() {
+        // Act
+        carameloRepositorio.delete(caramelo);
+        Caramelo eliminado = carameloRepositorio.findById(caramelo.getId()).orElse(null);
 
- @Test
- public void testBuscarCarameloPorId() {
-    
-     Caramelo encontrado = CarameloRepositorio.findById(caramelo.getId()).orElse(null);
-     assertThat(encontrado).isEqualTo(caramelo);
- }
-
-
- @Test
- public void testListarCaramelos() {
-   
-     List<Caramelo> Caramelos = (List<Caramelo>) CarameloRepositorio.findAll();
-     assertThat(Caramelos).isNotEmpty();
-     assertThat(Caramelos).contains(caramelo);
- }
-
-
- @Test
- public void testEliminarCaramelo() {
-    
-     CarameloRepositorio.delete(caramelo);
-     Caramelo eliminado = CarameloRepositorio.findById(caramelo.getId()).orElse(null);
-     assertThat(eliminado).isNull();
- }
+        // Assert
+        assertThat(eliminado).isNull();
+    }
 }

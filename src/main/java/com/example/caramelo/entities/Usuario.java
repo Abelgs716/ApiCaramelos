@@ -12,37 +12,46 @@ import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 
+// Clase que representa la entidad Usuario y implementa UserDetails para la autenticación de Spring Security
 @Entity
 public class Usuario implements UserDetails {
+
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String firstName;
-	private String lastName;
+
+	private String firstName; // Nombre del usuario
+	private String lastName; // Apellido del usuario
+
 	@Column(unique = true)
-	private String email;
-	private String password;
+	private String email; // Correo electrónico del usuario
+	private String password; // Contraseña del usuario
 
 	@ElementCollection(fetch = FetchType.EAGER, targetClass = Role.class)
 	@Enumerated(EnumType.STRING)
 	@CollectionTable(name = "usuario_rol")
 	@Column(name = "RolesUsuario")
-	private Set<Role> roles = new HashSet<>();
+	private Set<Role> roles = new HashSet<>(); // Conjunto de roles del usuario
 
 	@Transactional
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		roles.size(); 
+		roles.size();
 
+		// Mapear los roles a objetos GrantedAuthority
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toList());
 	}
 
+	// Métodos de acceso para el nombre de usuario
 	@Override
 	public String getUsername() {
 		return email;
 	}
 
+	// Métodos que indican que la cuenta no expira, no está bloqueada y las
+	// credenciales no expiran
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -58,16 +67,19 @@ public class Usuario implements UserDetails {
 		return true;
 	}
 
+	// Método que indica que el usuario está habilitado
 	@Override
 	public boolean isEnabled() {
 		return true;
 	}
 
+	// Método de acceso para la contraseña del usuario
 	@Override
 	public String getPassword() {
 		return password;
 	}
 
+	// Métodos de modificación para los campos del usuario
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
@@ -84,6 +96,7 @@ public class Usuario implements UserDetails {
 		this.password = password;
 	}
 
+	// Métodos de acceso para el conjunto de roles del usuario
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -92,20 +105,23 @@ public class Usuario implements UserDetails {
 		this.roles = roles;
 	}
 
+	// Métodos de acceso para el ID del usuario
 	public Long getId() {
 		return id;
 	}
 
+	// Métodos de acceso para el nombre del usuario
 	public String getFirstName() {
 		return firstName;
 	}
 
+	// Métodos de acceso para el apellido del usuario
 	public String getLastName() {
 		return lastName;
 	}
 
+	// Métodos de acceso para el correo electrónico del usuario
 	public String getEmail() {
 		return email;
 	}
-
 }

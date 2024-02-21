@@ -7,12 +7,13 @@ import org.springframework.stereotype.Repository;
 
 import com.example.caramelo.entities.Usuario;
 
+// Repositorio JPA para la entidad Usuario
 @Repository
 public interface UserRepository extends JpaRepository<Usuario, Long> {
-	
-	Optional<Usuario> findByEmail(String email);
 
-	Optional<Usuario> findById(Long id);
+	Optional<Usuario> findByEmail(String email); // Buscar usuario por correo electrónico
 
-	Boolean existsByEmail(String email);
+	Optional<Usuario> findById(Long id); // Buscar usuario por ID
+
+	Boolean existsByEmail(String email); // Verificar si existe un usuario con el correo electrónico proporcionado
 }
