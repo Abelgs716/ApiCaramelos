@@ -45,7 +45,9 @@ public class CaramelosController {
 	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Page<Caramelo>> listarTodosLosCaramelos(
 			@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size) {
+			@RequestParam(defaultValue = "10") int size,
+			@RequestParam(required = false) String peso,
+			@RequestParam(required = false) String ingredientes) {
 
 		// Registrar información en el log sobre la llamada al endpoint
 		logger.info("CaramelosController :: listarTodosLosCaramelos");
@@ -54,11 +56,31 @@ public class CaramelosController {
 		Pageable pageable = PageRequest.of(page, size);
 
 		// Obtener la página de caramelos utilizando el servicio
-		Page<Caramelo> caramelos = caramelosService.listarTodosLosCaramelos(pageable);
+		Page<Caramelo> caramelos;
+        if (peso != null && ingredientes != null) {
+
+            caramelos = caramelosService.filtrarPorPesoEIngredientes(peso, ingredientes, pageable);
+
+        } else if (peso != null) {
+
+        	caramelos = caramelosService.filtrarPorPeso(peso, pageable);
+
+        } else if (ingredientes != null) {
+
+        	caramelos = caramelosService.filtrarPorIngredientes(ingredientes, pageable);
+
+        } else {
+
+        	caramelos = caramelosService.listarTodosLosCaramelos(pageable);
+
+        }
+		
 
 		// Retornar la página de caramelos como respuesta
 		return new ResponseEntity<>(caramelos, HttpStatus.OK);
 	}
+	
+	
 
 	// Leer un caramelo por ID
 	@GetMapping("/{id}")

@@ -17,5 +17,11 @@ public interface CaramelosService {
 	Caramelo actualizarCaramelo(Long id, Caramelo detallesCaramelo); // Actualizar los detalles de un caramelo existente
 
 	void eliminarCaramelo(Long id); // Eliminar un caramelo por su ID
+	
+	 Page<Caramelo> filtrarPorPeso(String peso, Pageable pageable);
+	 Page<Caramelo> filtrarPorIngredientes(String ingredientes, Pageable pageable);
+	 Page<Caramelo> filtrarPorPesoEIngredientes(String peso, String ingredientes, Pageable pageable);
+
+	   
 
 }

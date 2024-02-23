@@ -54,4 +54,28 @@ public class CaramelosServiceImpl implements CaramelosService {
     public Page<Caramelo> listarTodosLosCaramelos(Pageable pageable) {
         return CarameloRepository.findAll(pageable);
     }
+    
+    @Override
+    public Page<Caramelo> filtrarPorPeso(String peso, Pageable pageable) {
+
+        return CarameloRepository.findByPesoContainingIgnoreCase(peso, pageable);
+
+    }
+
+
+    @Override
+    public Page<Caramelo> filtrarPorIngredientes(String ingredientes, Pageable pageable) {
+
+        return CarameloRepository.findByIngredientesContainingIgnoreCase(ingredientes, pageable);
+
+    }
+
+    
+
+    @Override
+    public Page<Caramelo> filtrarPorPesoEIngredientes(String peso, String ingredientes, Pageable pageable) {
+
+        return CarameloRepository.findByPesoContainingIgnoreCaseAndIngredientesContainingIgnoreCase(peso, ingredientes, pageable);
+
+    }
 }
